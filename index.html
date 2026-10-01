@@ -1,0 +1,821 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <!-- Esto asegura que la página sea responsiva en celulares -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LapZone - Tu tienda de laptops y accesorios ideales</title>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- FontAwesome para iconos -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --primary-color: #2563eb;
+            --secondary-color: #1e40af;
+            --accent-color: #3b82f6;
+            --dark-color: #1e293b;
+            --light-color: #f8fafc;
+            --gray-color: #64748b;
+            --white: #ffffff;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            color: var(--dark-color);
+            background-color: var(--light-color);
+            line-height: 1.6;
+        }
+
+        /* HEADER Y NAVEGACIÓN */
+        header {
+            background-color: var(--white);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 20px;
+        }
+
+        .logo {
+            font-size: 22px;
+            font-weight: 700;
+            color: var(--primary-color);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .nav-links {
+            list-style: none;
+            display: flex;
+            gap: 20px;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--dark-color);
+            font-weight: 500;
+            font-size: 15px;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary-color);
+        }
+
+        /* HERO SECTION */
+        .hero {
+            background: linear-gradient(135deg, var(--dark-color), var(--secondary-color));
+            color: var(--white);
+            padding: 140px 20px 80px;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 36px;
+            margin-bottom: 20px;
+            line-height: 1.2;
+        }
+
+        .hero p {
+            font-size: 16px;
+            max-width: 700px;
+            margin: 0 auto 30px;
+            color: #cbd5e1;
+        }
+
+        .btn {
+            display: inline-block;
+            background-color: var(--primary-color);
+            color: var(--white);
+            padding: 12px 30px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: background 0.3s, transform 0.2s;
+        }
+
+        .btn:hover {
+            background-color: var(--secondary-color);
+            transform: translateY(-2px);
+        }
+
+        /* CONTENEDOR GENERAL */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 50px 20px;
+        }
+
+        /* MISIÓN Y VISIÓN */
+        .mission-vision {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+            margin-bottom: 60px;
+        }
+
+        .card {
+            background: var(--white);
+            padding: 30px 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+        }
+
+        .card i {
+            font-size: 32px;
+            color: var(--primary-color);
+            margin-bottom: 15px;
+        }
+
+        .card h2 {
+            font-size: 22px;
+            margin-bottom: 12px;
+            color: var(--dark-color);
+        }
+
+        .card p {
+            color: var(--gray-color);
+            font-size: 15px;
+        }
+
+        /* GALERÍA DE LAPTOPS */
+        .gallery-section {
+            margin-bottom: 60px;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 28px;
+            margin-bottom: 10px;
+            color: var(--dark-color);
+        }
+
+        .section-subtitle {
+            text-align: center;
+            color: var(--gray-color);
+            margin-bottom: 30px;
+            font-size: 15px;
+        }
+
+        .laptops-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 20px;
+        }
+
+        .laptop-card {
+            background: var(--white);
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            position: relative;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .laptop-badge {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--white);
+            z-index: 10;
+        }
+
+        .badge-baja {
+            background-color: #64748b;
+        }
+
+        .badge-media {
+            background-color: var(--primary-color);
+        }
+
+        .laptop-img-container {
+            width: 100%;
+            height: 190px;
+            overflow: hidden;
+            background-color: #f1f5f9;
+        }
+
+        .laptop-img-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .laptop-info {
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+        }
+
+        .laptop-info h3 {
+            font-size: 18px;
+            margin-bottom: 5px;
+            color: var(--dark-color);
+        }
+
+        .laptop-brand {
+            font-size: 12px;
+            color: var(--primary-color);
+            font-weight: 600;
+            margin-bottom: 8px;
+            text-transform: uppercase;
+        }
+
+        .laptop-info p {
+            font-size: 14px;
+            color: var(--gray-color);
+            margin-bottom: 15px;
+            flex-grow: 1;
+        }
+
+        .laptop-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-top: 1px solid #f1f5f9;
+            padding-top: 12px;
+        }
+
+        .laptop-price {
+            font-size: 17px;
+            font-weight: 700;
+            color: var(--dark-color);
+        }
+
+        .laptop-btn {
+            background: var(--light-color);
+            color: var(--primary-color);
+            border: 1px solid var(--primary-color);
+            padding: 6px 12px;
+            border-radius: 6px;
+            font-size: 12px;
+            font-weight: 600;
+            text-decoration: none;
+        }
+
+        /* HISTORIA Y CATEGORÍAS */
+        .history-section {
+            background: var(--white);
+            padding: 30px 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            margin-bottom: 60px;
+        }
+
+        .history-section h2 {
+            font-size: 26px;
+            margin-bottom: 15px;
+            color: var(--dark-color);
+        }
+
+        .history-section p {
+            color: var(--gray-color);
+            margin-bottom: 15px;
+            font-size: 15px;
+        }
+
+        .categories-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 15px;
+            margin-top: 25px;
+        }
+
+        .category-item {
+            background: var(--light-color);
+            padding: 15px;
+            border-radius: 8px;
+            border-left: 4px solid var(--primary-color);
+        }
+
+        .category-item h4 {
+            margin-bottom: 5px;
+            color: var(--dark-color);
+            font-size: 15px;
+        }
+
+        .category-item p {
+            font-size: 13px;
+            margin: 0;
+        }
+
+        /* VALORES */
+        .values-section h2 {
+            text-align: center;
+            font-size: 28px;
+            margin-bottom: 35px;
+        }
+
+        .values-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 20px;
+        }
+
+        .value-card {
+            background: var(--white);
+            padding: 25px 20px;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.03);
+        }
+
+        .value-card i {
+            font-size: 26px;
+            color: var(--accent-color);
+            margin-bottom: 12px;
+        }
+
+        .value-card h3 {
+            font-size: 17px;
+            margin-bottom: 8px;
+        }
+
+        .value-card p {
+            font-size: 13px;
+            color: var(--gray-color);
+        }
+
+        /* FOOTER */
+        footer {
+            background-color: var(--dark-color);
+            color: var(--white);
+            padding: 40px 20px 20px;
+            margin-top: 50px;
+        }
+
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+
+        .footer-col h3 {
+            font-size: 17px;
+            margin-bottom: 15px;
+            color: var(--white);
+            position: relative;
+        }
+
+        .footer-col h3::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: -6px;
+            width: 30px;
+            height: 2px;
+            background-color: var(--primary-color);
+        }
+
+        .footer-col ul {
+            list-style: none;
+        }
+
+        .footer-col ul li {
+            margin-bottom: 8px;
+        }
+
+        .footer-col ul li a {
+            color: #94a3b8;
+            text-decoration: none;
+            font-size: 14px;
+        }
+
+        .footer-contact-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            margin-bottom: 10px;
+            font-size: 14px;
+            color: #94a3b8;
+        }
+
+        .footer-contact-item i {
+            color: var(--primary-color);
+            margin-top: 3px;
+        }
+
+        .social-links {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .social-links a {
+            color: #94a3b8;
+            text-decoration: none;
+            font-size: 14px;
+        }
+
+        .footer-bottom {
+            max-width: 1200px;
+            margin: 0 auto;
+            border-top: 1px solid #334155;
+            padding-top: 15px;
+            text-align: center;
+        }
+
+        .footer-bottom p {
+            color: #64748b;
+            font-size: 12px;
+        }
+
+        /* BOTÓN FLOTANTE DE WHATSAPP */
+        .whatsapp-btn {
+            position: fixed;
+            bottom: 25px;
+            right: 25px;
+            width: 60px;
+            height: 60px;
+            background-color: #25d366;
+            color: #ffffff;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 32px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.25);
+            text-decoration: none;
+            z-index: 1000;
+            transition: transform 0.3s ease, background-color 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .whatsapp-btn:hover {
+            background-color: #128c7e;
+            color: #ffffff;
+            transform: scale(1.1);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.35);
+        }
+
+        /* MEDIA QUERIES PARA CELULARES PEQUEÑOS */
+        @media (max-width: 600px) {
+            .nav-links {
+                display: none; /* Oculta los links de texto en pantallas muy chicas para mantener limpio el header */
+            }
+            .hero {
+                padding: 120px 15px 60px;
+            }
+            .hero h1 {
+                font-size: 28px;
+            }
+            .hero p {
+                font-size: 15px;
+            }
+            .history-section {
+                padding: 20px 15px;
+            }
+            .whatsapp-btn {
+                width: 50px;
+                height: 50px;
+                font-size: 26px;
+                bottom: 20px;
+                right: 20px;
+            }
+        }
+
+        /* FORMULARIO DE COMPRA */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 2000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .modal-contenido {
+            background: var(--white);
+            width: 100%;
+            max-width: 400px;
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+        }
+
+        .modal-contenido h2 {
+            margin-bottom: 15px;
+        }
+
+        .modal-contenido input {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 12px;
+            border: 1px solid #cbd5e1;
+            border-radius: 6px;
+        }
+
+        .modal-contenido button {
+            width: 100%;
+            border: none;
+            cursor: pointer;
+            margin-top: 5px;
+        }
+
+        .cerrar {
+            text-align: right;
+            font-size: 20px;
+            cursor: pointer;
+            margin-bottom: 5px;
+        }
+
+    </style>
+</head>
+<body>
+
+    <!-- HEADER -->
+    <header>
+        <div class="nav-container">
+            <a href="#" class="logo"><i class="fa-solid fa-laptop-code"></i> LapZone</a>
+            <ul class="nav-links">
+                <li><a href="#inicio">Inicio</a></li>
+                <li><a href="#galeria">Catálogo</a></li>
+                <li><a href="#mision-vision">Misión</a></li>
+                <li><a href="#historia">Historia</a></li>
+                <li><a href="#valores">Valores</a></li>
+            </ul>
+        </div>
+    </header>
+
+    <!-- HERO SECTION -->
+    <section id="inicio" class="hero">
+        <h1>La laptop ideal para cada tipo de persona</h1>
+        <p>Soluciones tecnológicas adaptadas a estudiantes, profesionales y gamers en un solo lugar.</p>
+        <a href="#galeria" class="btn">Ver Catálogo</a>
+    </section>
+
+    <!-- CONTENIDO PRINCIPAL -->
+    <div class="container">
+
+        <!-- GALERÍA DE LAPTOPS -->
+        <section id="galeria" class="gallery-section">
+            <h2 class="section-title">Nuestra Vitrina Tecnológica</h2>
+            <p class="section-subtitle">Explora modelos desde gama baja hasta gama media.</p>
+            
+            <div class="laptops-grid">
+                <div class="laptop-card">
+                    <span class="laptop-badge badge-baja">Gama Baja</span>
+                    <div class="laptop-img-container">
+                        <img src="https://images.unsplash.com/photo-1541807084-5c52b6b3adef?auto=format&fit=crop&w=600&q=80" alt="Lenovo IdeaPad Slim">
+                    </div>
+                    <div class="laptop-info">
+                        <span class="laptop-brand">Lenovo</span>
+                        <h3>IdeaPad Slim 1</h3>
+                        <p>Perfecta para estudiantes. Eficiente, ligera y lista para clases online o navegación diaria.</p>
+                        <div class="laptop-footer">
+                            <span class="laptop-price">$329.00</span>
+                            <button type="button" class="laptop-btn" onclick="abrirCompra('Lenovo IdeaPad Slim 1')">Comprar</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="laptop-card">
+                    <span class="laptop-badge badge-baja">Gama Baja</span>
+                    <div class="laptop-img-container">
+                        <img src="https://images.unsplash.com/photo-1517336714731-489689fd1ca8?auto=format&fit=crop&w=600&q=80" alt="HP Essential 14">
+                    </div>
+                    <div class="laptop-info">
+                        <span class="laptop-brand">HP</span>
+                        <h3>Essential 14</h3>
+                        <p>Batería duradera y diseño compacto para tus tareas cotidianas de oficina y estudio.</p>
+                        <div class="laptop-footer">
+                            <span class="laptop-price">$299.00</span>
+                            <button type="button" class="laptop-btn" onclick="abrirCompra('HP Essential 14')">Comprar</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="laptop-card">
+                    <span class="laptop-badge badge-media">Gama Media</span>
+                    <div class="laptop-img-container">
+                        <img src="https://images.unsplash.com/photo-1588872657578-7efd1f1555ed?auto=format&fit=crop&w=600&q=80" alt="ASUS VivoBook 15 Pro">
+                    </div>
+                    <div class="laptop-info">
+                        <span class="laptop-brand">ASUS</span>
+                        <h3>VivoBook 15 Pro</h3>
+                        <p>Gran balance de potencia y velocidad para multitarea fluida y diseño moderado.</p>
+                        <div class="laptop-footer">
+                            <span class="laptop-price">$589.00</span>
+                            <button type="button" class="laptop-btn" onclick="abrirCompra('ASUS VivoBook 15 Pro')">Comprar</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="laptop-card">
+                    <span class="laptop-badge badge-media">Gama Media</span>
+                    <div class="laptop-img-container">
+                        <img src="https://images.unsplash.com/photo-1531297484001-80022131f5a1?auto=format&fit=crop&w=600&q=80" alt="Dell Inspiron 3000">
+                    </div>
+                    <div class="laptop-info">
+                        <span class="laptop-brand">Dell</span>
+                        <h3>Inspiron 3000 Series</h3>
+                        <p>Construcción robusta, pantalla de alta resolución y almacenamiento SSD ultrarrápido.</p>
+                        <div class="laptop-footer">
+                            <span class="laptop-price">$649.00</span>
+                            <button type="button" class="laptop-btn" onclick="abrirCompra('Dell Inspiron 3000')">Comprar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- MISIÓN Y VISIÓN -->
+        <section id="mision-vision" class="mission-vision">
+            <div class="card">
+                <i class="fa-solid fa-eye"></i>
+                <h2>Visión</h2>
+                <p>Ser la plataforma líder en venta de accesorios para laptops, destacando por innovación, calidad y rapidez.</p>
+            </div>
+            <div class="card">
+                <i class="fa-solid fa-bullseye"></i>
+                <h2>Misión</h2>
+                <p>Brindar accesorios funcionales, duraderos y de diseño vanguardista que optimicen la vida útil de cada equipo.</p>
+            </div>
+        </section>
+
+        <!-- HISTORIA Y LÍNEAS DE PRODUCTOS -->
+        <section id="historia" class="history-section">
+            <h2>Nuestra Historia</h2>
+            <p><strong>LapZone</strong> nació de la pasión de un grupo de jóvenes por la tecnología y la innovación, con el propósito de ofrecer la laptop ideal para cada tipo de persona en un solo lugar.</p>
+            
+            <div class="categories-grid">
+                <div class="category-item">
+                    <h4><i class="fa-solid fa-graduation-cap"></i> Estudiar y Trabajar</h4>
+                    <p>Equipos ligeros, eficientes y con batería de larga duración.</p>
+                </div>
+                <div class="category-item">
+                    <h4><i class="fa-solid fa-briefcase"></i> Pro / Empresariales</h4>
+                    <p>Gran potencia de procesamiento y seguridad avanzada.</p>
+                </div>
+                <div class="category-item">
+                    <h4><i class="fa-solid fa-gamepad"></i> Gamer</h4>
+                    <p>Gráficas dedicadas y sistemas de enfriamiento avanzados.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- VALORES -->
+        <section id="valores" class="values-section">
+            <h2>Nuestros Valores</h2>
+            <div class="values-grid">
+                <div class="value-card">
+                    <i class="fa-solid fa-lightbulb"></i>
+                    <h3>Creatividad</h3>
+                    <p>Soluciones innovadoras y originales.</p>
+                </div>
+                <div class="value-card">
+                    <i class="fa-solid fa-users"></i>
+                    <h3>Trabajo en equipo</h3>
+                    <p>Pasión y profesionalismo.</p>
+                </div>
+                <div class="value-card">
+                    <i class="fa-solid fa-shield-halved"></i>
+                    <h3>Confianza</h3>
+                    <p>Transparencia y seguridad en cada compra.</p>
+                </div>
+                <div class="value-card">
+                    <i class="fa-solid fa-headset"></i>
+                    <h3>Orientación al cliente</h3>
+                    <p>Escuchamos tus necesidades tecnológicas.</p>
+                </div>
+            </div>
+        </section>
+
+    </div>
+
+    <!-- FOOTER -->
+    <footer id="contacto">
+        <div class="footer-container">
+            
+            <div class="footer-col">
+                <h3>Contacto</h3>
+                <div class="footer-contact-item">
+                    <i class="fa-solid fa-phone"></i>
+                    <span>+51 999 456 782</span>
+                </div>
+                <div class="footer-contact-item">
+                    <i class="fa-solid fa-envelope"></i>
+                    <span>contacto@lapzone.com</span>
+                </div>
+                <div class="footer-contact-item">
+                    <i class="fa-solid fa-clock"></i>
+                    <span>Lunes a sábado:<br>9:00 a. m. – 7:00 p. m.</span>
+                </div>
+            </div>
+
+            <div class="footer-col">
+                <h3>Información</h3>
+                <ul>
+                    <li><a href="#historia">Sobre nosotros</a></li>
+                    <li><a href="#contacto">Contáctanos</a></li>
+                    <li><a href="#">Preguntas frecuentes</a></li>
+                    <li><a href="#">Términos y condiciones</a></li>
+                    <li><a href="#">Política de privacidad</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-col">
+                <h3>Categorías</h3>
+                <ul>
+                    <li><a href="#galeria">Laptops</a></li>
+                    <li><a href="#">Computadoras</a></li>
+                    <li><a href="#">Accesorios</a></li>
+                    <li><a href="#">Ofertas</a></li>
+                    <li><a href="#">Tecnología</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-col">
+                <h3>Síguenos</h3>
+                <div class="social-links">
+                    <a href="#"><i class="fa-brands fa-instagram"></i> Instagram @LAPZONE</a>
+                    <a href="#"><i class="fa-brands fa-facebook"></i> Facebook LAPZOND</a>
+                    <a href="#"><i class="fa-brands fa-tiktok"></i> TikTok LAPZONE</a>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="footer-bottom">
+            <p>&copy; 2026 LapZone. Todos los derechos reservados.</p>
+        </div>
+    </footer>
+
+
+    <!-- FORMULARIO DE COMPRA -->
+    <div id="modalCompra" class="modal">
+        <div class="modal-contenido">
+            <div class="cerrar" onclick="cerrarCompra()">&times;</div>
+            <h2>Comprar producto</h2>
+            <p id="productoElegido"></p>
+
+            <form id="Compra" onsubmit="enviarCompra(event)">
+                <input type="text" id="nombre" placeholder="Nombre" required>
+                <input type="email" id="correo" placeholder="Correo electrónico" required>
+                <input type="tel" id="telefono" placeholder="Teléfono" required>
+                <button type="submit" class="btn">Enviar datos</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- BOTÓN FLOTANTE DE WHATSAPP -->
+    <a href="https://wa.me/51999456782?text=Hola%20LapZone,%20deseo%20recibir%20informaci%C3%B3n%20sobre%20sus%20laptops" class="whatsapp-btn" target="_blank" rel="noopener noreferrer" aria-label="Contactar por WhatsApp">
+        <i class="fa-brands fa-whatsapp"></i>
+    </a>
+
+
+    <script>
+        function abrirCompra(producto) {
+            document.getElementById("modalCompra").style.display = "flex";
+            document.getElementById("productoElegido").textContent =
+                "Producto seleccionado: " + producto;
+        }
+
+        function cerrarCompra() {
+            document.getElementById("modalCompra").style.display = "none";
+        }
+
+        function enviarCompra(event) {
+            event.preventDefault();
+
+            document.getElementById("Compra").innerHTML =
+                '<h3>¡Datos enviados correctamente!</h3>' +
+                '<p>Vale, le avisaremos para coordinar su compra.</p>';
+        }
+    </script>
+
+</body>
+</html>
